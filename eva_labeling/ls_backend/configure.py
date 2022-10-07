@@ -9,9 +9,10 @@ from .client import get_client
 from .project_manager import get_project
 
 class LS_Configure:
-    def __init__(self, client):
+    def __init__(self, client, project_id=-1):
         self.client = client
         self.project = 0
+        self.project_id = project_id
 
     def _get_project(self, project_id):
         if self.project==0:
@@ -21,6 +22,7 @@ class LS_Configure:
     def create_project(self, project_name, project_config):
         ls = get_client()
         self.project = ls.start_project(title=project_name, label_config=project_config)
+        self.project_id = self.project.get_params()['id']
         return self.project
 
     def import_tasks(self, project_id, tasks) -> None:
