@@ -5,7 +5,7 @@ Like creating a project, creating a task, etc.
 
 
 from label_studio_sdk import Client
-from .connect import get_client
+from .client import get_client
 from .project_manager import get_project
 
 class LS_Configure:
