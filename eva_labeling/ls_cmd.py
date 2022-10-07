@@ -38,7 +38,7 @@ def dir_to_tasks(save_path):
     tasks = []
     list_of_tasks = os.listdir(save_path)
     for i in list_of_tasks:
-        tasks.append({"data": {"image": i}})
+        tasks.append({"data": {"image": "/data/local-files/?d=workspace/label/data/"+ i}})
     return tasks
 
 
@@ -55,7 +55,7 @@ def start_label_studio():
 
     make_local_storage(ls_config.project.get_params()['id'], save_path)
 
-    # ls_config.import_tasks(ls_config.project_id, dir_to_tasks(save_path))
+    ls_config.import_tasks(ls_config.project_id, dir_to_tasks(save_path))
 
 def export_results():
     if values['ls'] == 0:
