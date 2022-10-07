@@ -3,7 +3,7 @@ Contains code to connect to the Label Studio API and check the connection.
 Will contain additional connection options in the future
 """
 
-import configs
+import eva_labeling.configs as configs
 # Import the SDK and the client module
 from label_studio_sdk import Client
 

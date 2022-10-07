@@ -1,1 +1,1 @@
-import constants
+from eva_labeling.configs.constants import *

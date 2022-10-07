@@ -5,8 +5,8 @@ Like creating a project, creating a task, etc.
 
 
 from label_studio_sdk import Client
-from connect import get_client
-from project_manager import get_project
+from .connect import get_client
+from .project_manager import get_project
 
 project = 0
 def _get_project(project_id):
