@@ -8,20 +8,24 @@ from label_studio_sdk import Client
 from .connect import get_client
 from .project_manager import get_project
 
-project = 0
-def _get_project(project_id):
-    if project==0:
-        project = get_project(project_id)
-    return project
+class LS_Configure:
+    def __init__(self, client):
+        self.client = client
+        self.project = 0
 
-def create_project(project_name, project_config):
-    ls = get_client()
-    project = ls.create_project(title=project_name, label_config=project_config)
-    return project
+    def _get_project(self, project_id):
+        if self.project==0:
+            self.project = get_project(self.client, project_id)
+        return self.project
 
-def import_tasks(project_id, tasks) -> None:
-    project = _get_project(project_id)
-    project.import_tasks(project, tasks)
+    def create_project(self, project_name, project_config):
+        ls = get_client()
+        self.project = ls.start_project(title=project_name, label_config=project_config)
+        return self.project
 
-def add_predictions():
-    pass
+    def import_tasks(self, project_id, tasks) -> None:
+        self.project = self._get_project(project_id)
+        self.project.import_tasks(tasks)
+
+    def add_predictions():
+        pass
