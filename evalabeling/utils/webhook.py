@@ -1,0 +1,1 @@
+# This file sends Request to Label Studio to enable Webhooks
