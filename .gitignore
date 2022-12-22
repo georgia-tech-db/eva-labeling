@@ -1,6 +1,7 @@
 # API KEYS/ Tokens
 eva-labeling/configs/constants.py
 ENV
+load_env.bash
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
