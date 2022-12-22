@@ -22,7 +22,7 @@ It lets you connect to Label Studio server to do the following:
     git clone https://github.com/Aryan-Rajoria/eva-labeling.git
     ```
 
-2. Setup Environment
+2. Setup Environment  
     It is highly recommended to use `venv`, `virtualenv` or `conda` python environments. You can use the same environment as Label Studio does. [Read more](https://docs.python.org/3/tutorial/venv.html#creating-virtual-environments) about creating virtual environments via `venv`.
    ```bash
    cd eva-labeling
