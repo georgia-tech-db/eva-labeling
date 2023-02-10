@@ -8,6 +8,8 @@ It lets you connect to Label Studio server to do the following:
 - Dynamically pre-annotate data based on model inference results
 - Retrain or fine-tune a model based on recently annotated data
 
+<img title="EVA Label Studio Integration" alt="Pipeline" src="assets/pipeline_screenshot.png" width="500">
+
 ## How it works
 
 1. This application helps fetch data from Label Studio server and add it to EVA.
