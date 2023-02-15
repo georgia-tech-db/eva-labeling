@@ -18,3 +18,9 @@ def task_created(request):
     if request.data["action"] == "TASKS_DELETED":
         print("Tasks were deleted")
     return HttpResponse({"result": "success"})
+
+@api_view(["GET"])
+def other_tasks(request):
+
+    print(request)
+    return HttpResponse("everything ok")
