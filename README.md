@@ -43,6 +43,8 @@ It lets you connect to Label Studio server to do the following:
     > Add webhook to the project, in which you want to use `evadb`
     <img title="Webhook Registering" alt="Webhook Registering with EVA" src="assets/webhook_registering.png" width="500">
 
-5. Start and Register EVA ML Backend to Label Studio.  
+5. Start and Register EVA ML Backend to Label Studio.
+    > Follow [Label Studio ML documentation](https://github.com/heartexlabs/label-studio-ml-backend)
+    > The model can be found in [`eva-ls-ml`](https://github.com/Aryan-Rajoria/eva-ls-ml)
     <img title="Webhook Registering" alt="Webhook Registering with EVA" src="assets/model_registering.png" width="500">
     <img title="Webhook Registering" alt="Webhook Registering with EVA" src="assets/model_registered.png" width="500">
