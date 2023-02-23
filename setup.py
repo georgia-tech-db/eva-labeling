@@ -14,12 +14,12 @@ with open('requirements.txt') as f:
 setuptools.setup(
     name=evalabeling.package_name,
     version=evalabeling.__version__,
-    author='Heartex',
-    author_email="hello@heartex.com",
-    description='Label Studio ML backend',
+    author='Aryan Rajoria',
+    author_email="arajoria3@gatech.edu",
+    description='EVA integration for Label Studio',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/heartexlabs/label-studio-ml-backend',
+    url='https://github.com/aryan-rajoria/eva-labeling',
     packages=setuptools.find_packages(),
     include_package_data=True,
     classifiers=[
@@ -31,7 +31,7 @@ setuptools.setup(
     python_requires='>=3.6',
     entry_points={
         'console_scripts': [
-            'label-studio-ml=label_studio_ml.server:main'
+            'evalabeling=evalabeling.server:main'
         ],
     }
 )
