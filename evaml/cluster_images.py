@@ -12,8 +12,8 @@ import cv2
 import nest_asyncio
 from botocore.exceptions import ClientError
 from eva.server.db_api import connect
-from label_studio_ml.model import LabelStudioMLBase
-from label_studio_ml.utils import DATA_UNDEFINED_NAME
+from evalabeling.utils import DATA_UNDEFINED_NAME
+from evalabeling.model import EvaLabelingBase
 from label_studio_tools.core.utils.io import get_data_dir
 
 logger = logging.getLogger(__name__)
@@ -49,7 +49,7 @@ def remove_all_predictions():
 
 image_for_similarity = None
 
-class EVAModel(LabelStudioMLBase):
+class EVAModel(EvaLabelingBase):
     """
     EVA connection using Label Studio ML backend server. This will allow you to run EVA queries on Label Studio.
     """
@@ -63,6 +63,7 @@ class EVAModel(LabelStudioMLBase):
         self.labels_file = labels_file
 
         # TODO: test for when there is image_dir
+        print(self.image_name)
 
         UPLOAD_DIR = os.path.join(get_data_dir(), 'media')
         self.image_dir = image_dir or UPLOAD_DIR
@@ -218,10 +219,12 @@ class EVAModel(LabelStudioMLBase):
         # remove the previous predictions
         remove_all_predictions()
         # add new predictions
-        for task in tasks:
-            if task['id']:
+        
+        if 'event' in kwargs:
+            if kwargs['event'] == 'ANNOTATION_CREATED':
+                task = kwargs['data']['task']
                 image_for_similarity = self.image_dir + task['data']['image'].split('/data')[-1]
                 self.add_image(image_for_similarity)
-                break
+
         return {}
         

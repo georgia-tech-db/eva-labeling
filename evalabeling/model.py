@@ -292,7 +292,7 @@ class EvaLabelingBase(ABC):
     
     TRAIN_EVENTS = (
         'ANNOTATION_CREATED',
-        'ANNOTATION_UPDATED',
+        
         'ANNOTATION_DELETED',
         'PROJECT_UPDATED'
     )
@@ -315,6 +315,12 @@ class EvaLabelingBase(ABC):
             train_output = self.fit((), event=event, data=data, job_id=job_id, **additional_params)
             logger.debug(f'Job {job_id}: Train finished.')
             return train_output
+        if event == 'ANNOTATIONS_DELETED':
+            # REMOVE the image.txt file
+            pass
+        if event == 'ANNOTATION_CREATED':
+            # ADD image.txt file
+            pass
 
     def fit(self, tasks, workdir=None, **kwargs):
         return {}
