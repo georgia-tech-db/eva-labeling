@@ -1,8 +1,8 @@
 from abc import abstractmethod
-from .model import LabelStudioMLBase
+from .model import EvaLabelingBase
 
 
-class LabelStudioMLBaseHelper(LabelStudioMLBase):
+class EvaLabelingBaseHelper(EvaLabelingBase):
 
     @abstractmethod
     def prepare_tasks(self, tasks, workdir=None, **kwargs):
@@ -34,7 +34,7 @@ class LabelStudioMLBaseHelper(LabelStudioMLBase):
         return 'completions' in task
 
 
-class LabelStudioMLChoices(LabelStudioMLBaseHelper):
+class LabelStudioMLChoices(EvaLabelingBaseHelper):
 
     def __init__(self, **kwargs):
         super(LabelStudioMLChoices, self).__init__(**kwargs)

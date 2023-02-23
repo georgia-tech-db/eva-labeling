@@ -10,7 +10,7 @@ import re
 from colorama import Fore
 
 
-from .model import get_all_classes_inherited_LabelStudioMLBase
+from .model import get_all_classes_inherited_EvaLabelingBase
 
 
 colorama.init()
@@ -101,7 +101,7 @@ def create_dir(args):
     if model_def_in_path(script_path):
         script_path, model_class = args.script.rsplit(':', 1)
     else:
-        model_classes = get_all_classes_inherited_LabelStudioMLBase(script_path)
+        model_classes = get_all_classes_inherited_EvaLabelingBase(script_path)
         if len(model_classes) > 1:
             raise ValueError(
                 'You don\'t specify target model class, and we\'ve found {num} possible candidates within {script}. '
@@ -138,7 +138,9 @@ def create_dir(args):
 
 
 def start_server(args, subprocess_params):
-    project_dir = os.path.join(args.root_dir, args.project_name)
+    # project_dir = os.path.join(args.root_dir, args.project_name)
+    # wsgi = os.path.join(project_dir, '_wsgi.py')
+    project_dir = os.path.join(args.root_dir, "evaml")
     wsgi = os.path.join(project_dir, '_wsgi.py')
     os.system('python ' + wsgi + ' ' + ' '.join(subprocess_params))
 

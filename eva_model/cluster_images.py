@@ -11,8 +11,8 @@ import cv2
 import nest_asyncio
 from botocore.exceptions import ClientError
 from eva.server.db_api import connect
-from label_studio_ml.model import LabelStudioMLBase
-from label_studio_ml.utils import DATA_UNDEFINED_NAME
+from evalabeling.model import EvaLabelingBase
+from evalabeling.utils import DATA_UNDEFINED_NAME
 from label_studio_tools.core.utils.io import get_data_dir
 
 logger = logging.getLogger(__name__)
@@ -46,7 +46,7 @@ def remove_all_predictions():
         if not r.status_code==204:
             print("error deleting file:", url, headers)
 
-class EVAModel(LabelStudioMLBase):
+class EVAModel(EvaLabelingBase):
     """
     EVA connection using Label Studio ML backend server. This will allow you to run EVA queries on Label Studio.
     """

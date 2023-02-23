@@ -46,7 +46,7 @@ class ModelWrapper(object):
 
 
 class JobManager(object):
-    """Job Manager provides a facility to spin up background jobs for LabelStudioMLBase models"""
+    """Job Manager provides a facility to spin up background jobs for EvaLabelingBase models"""
 
     def get_result(self, model_version=None):
         """Return job result based on specified model_version (=job_id)"""
@@ -67,7 +67,7 @@ class JobManager(object):
         Job function to be run in background. It actually does the following:
         1. Creates model_class instance, possibly by using artefacts from previously finished jobs
         2. Calls model_class.process_event() method
-        :param model_class: LabelStudioMLBase instance
+        :param model_class: EvaLabelingBase instance
         :param event: event name (e.g. Label Studio webhook action name)
         :param data: job data (e.g. Label Studio webhook payload)
         :param job_id: user-defined job identifier
@@ -288,7 +288,7 @@ class RQJobManager(JobManager):
         pass
 
 
-class LabelStudioMLBase(ABC):
+class EvaLabelingBase(ABC):
     
     TRAIN_EVENTS = (
         'ANNOTATION_CREATED',
@@ -341,8 +341,8 @@ class LabelStudioMLManager(object):
         cls, model_class, model_dir=None, redis_host='localhost', redis_port=6379, redis_queue='default',
         **init_kwargs
     ):
-        if not issubclass(model_class, LabelStudioMLBase):
-            raise ValueError('Inference class should be the subclass of ' + LabelStudioMLBase.__class__.__name__)
+        if not issubclass(model_class, EvaLabelingBase):
+            raise ValueError('Inference class should be the subclass of ' + EvaLabelingBase.__class__.__name__)
 
         cls.model_class = model_class
         cls.redis_queue = redis_queue
@@ -768,7 +768,7 @@ class LabelStudioMLManager(object):
 
 
 
-def get_all_classes_inherited_LabelStudioMLBase(script_file):
+def get_all_classes_inherited_EvaLabelingBase(script_file):
     names = set()
     abs_path = os.path.abspath(script_file)
     module_name = os.path.splitext(os.path.basename(script_file))[0]
@@ -783,12 +783,12 @@ def get_all_classes_inherited_LabelStudioMLBase(script_file):
         exit(-1)
 
     for name, obj in inspect.getmembers(module, inspect.isclass):
-        if name == LabelStudioMLBase.__name__:
+        if name == EvaLabelingBase.__name__:
             continue
-        if issubclass(obj, LabelStudioMLBase):
+        if issubclass(obj, EvaLabelingBase):
             names.add(name)
         for base in obj.__bases__:
-            if LabelStudioMLBase.__name__ == base.__name__:
+            if EvaLabelingBase.__name__ == base.__name__:
                 names.add(name)
     sys.path.pop()
     return list(names)

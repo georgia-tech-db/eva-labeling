@@ -27,7 +27,7 @@ logging.config.dictConfig({
   }
 })
 
-from label_studio_ml.api import init_app
+from evalabeling.api import init_app
 from cluster_images import EVAModel
 
 
@@ -53,7 +53,7 @@ if __name__ == "__main__":
         help='Server host')
     parser.add_argument(
         '--kwargs', '--with', dest='kwargs', metavar='KEY=VAL', nargs='+', type=lambda kv: kv.split('='),
-        help='Additional LabelStudioMLBase model initialization kwargs')
+        help='Additional EvaLabelingBase model initialization kwargs')
     parser.add_argument(
         '-d', '--debug', dest='debug', action='store_true',
         help='Switch debug mode')
