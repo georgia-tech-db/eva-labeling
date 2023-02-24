@@ -12,8 +12,8 @@ import cv2
 import nest_asyncio
 from botocore.exceptions import ClientError
 from eva.server.db_api import connect
-from evalabeling.model import LabelStudioMLBase
 from evalabeling.utils import DATA_UNDEFINED_NAME
+from evalabeling.model import EvaLabelingBase
 from label_studio_tools.core.utils.io import get_data_dir
 
 logger = logging.getLogger(__name__)
@@ -63,6 +63,7 @@ class EVAModel(EvaLabelingBase):
         self.labels_file = labels_file
 
         # TODO: test for when there is image_dir
+        # print(self.image_name)
 
         UPLOAD_DIR = os.path.join(get_data_dir(), 'media')
         self.image_dir = image_dir or UPLOAD_DIR
@@ -218,10 +219,12 @@ class EVAModel(EvaLabelingBase):
         # remove the previous predictions
         remove_all_predictions()
         # add new predictions
-        for task in tasks:
-            if task['id']:
+        
+        if 'event' in kwargs:
+            if kwargs['event'] == 'ANNOTATION_CREATED':
+                task = kwargs['data']['task']
                 image_for_similarity = self.image_dir + task['data']['image'].split('/data')[-1]
                 self.add_image(image_for_similarity)
-                break
+
         return {}
         

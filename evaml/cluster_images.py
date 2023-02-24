@@ -63,7 +63,7 @@ class EVAModel(EvaLabelingBase):
         self.labels_file = labels_file
 
         # TODO: test for when there is image_dir
-        print(self.image_name)
+        # print(self.image_name)
 
         UPLOAD_DIR = os.path.join(get_data_dir(), 'media')
         self.image_dir = image_dir or UPLOAD_DIR
