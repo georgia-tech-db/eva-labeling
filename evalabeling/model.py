@@ -292,7 +292,7 @@ class EvaLabelingBase(ABC):
     
     TRAIN_EVENTS = (
         'ANNOTATION_CREATED',
-        
+        'ANNOTATION_UPDATED',
         'ANNOTATION_DELETED',
         'PROJECT_UPDATED'
     )
