@@ -4,6 +4,7 @@ ENV
 load_env.bash
 image.txt
 ./evaml/*.json
+*.pt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
