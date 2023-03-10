@@ -28,23 +28,31 @@ It lets you connect to Label Studio server to do the following:
    ```bash
    cd eva-labeling
    
-   # Install eva-labeling dependencies
-   pip install -r requirements.txt
+   # Install eva-labeling
+   pip install -e .
    ```
 
 3. Start eva-labeling server
     > Note: this will also start the `evadb` server.
     ```bash
-    python manage.py runserver
+    evalabeling start ./evaml
     ```
-    
-4. Register Webhook to Label Studio server
-    > Add webhook to the project, in which you want to use `evadb`
-    <img title="Webhook Registering" alt="Webhook Registering with EVA" src="assets/webhook_registering.png" width="500">
+
+4. Add Image Clustering Interface
+    ```html
+    <View>
+    <Image name="image" value="$image"/>
+    <RectangleLabels name="label" toName="image">
+      <Label value="Airplane" background="green"/>
+      <Label value="Car" background="blue"/>
+    </RectangleLabels>
+    <TextArea name="cluster" toName="image"
+              rows="1" editable="true" />
+    </View>
+    ```
 
 5. Start and Register EVA ML Backend to Label Studio.
-    > Follow [Label Studio ML documentation](https://github.com/heartexlabs/label-studio-ml-backend)
-    > The model can be found in [`eva-ls-ml`](https://github.com/Aryan-Rajoria/eva-ls-ml)
+    > Following [Label Studio ML documentation](https://github.com/heartexlabs/label-studio-ml-backend)  
     <img title="Webhook Registering" alt="Webhook Registering with EVA" src="assets/model_registering.png" width="500">
     <img title="Webhook Registering" alt="Webhook Registering with EVA" src="assets/model_registered.png" width="500">
 
