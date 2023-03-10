@@ -18,7 +18,7 @@ from label_studio_tools.core.utils.io import get_data_dir
 
 logger = logging.getLogger(__name__)
 
-EVA_CURSOR = connect(host='127.0.0.1', port=5432).cursor()
+# EVA_CURSOR = connect(host='127.0.0.1', port=5432).cursor()
 
 # TODO: Remove hardcoded url and key
 

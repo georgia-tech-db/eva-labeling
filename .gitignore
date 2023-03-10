@@ -2,6 +2,8 @@
 eva-labeling/configs/constants.py
 ENV
 load_env.bash
+image.txt
+./evaml/*.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

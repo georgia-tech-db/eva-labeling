@@ -8,12 +8,11 @@ It lets you connect to Label Studio server to do the following:
 - Dynamically pre-annotate data based on model inference results
 - Retrain or fine-tune a model based on recently annotated data
 
-<img title="EVA Label Studio Integration" alt="Pipeline" src="assets/pipeline_screenshot.png" width="500">
 
 ## How it works
 
 1. This application helps fetch data from Label Studio server and add it to EVA.
-2. Then you use Label Studio ML Backend to run `EVA QL` Statement on you data. (e.g. Clustering, Object detection, Object Tracking)
+2. Then you use Label Studio ML Backend to run `EVA Query` Statements on you data. (e.g. Clustering, Object detection, Object Tracking)
 3. Returns the desired output to Label Studio
 
 
@@ -48,3 +47,7 @@ It lets you connect to Label Studio server to do the following:
     > The model can be found in [`eva-ls-ml`](https://github.com/Aryan-Rajoria/eva-ls-ml)
     <img title="Webhook Registering" alt="Webhook Registering with EVA" src="assets/model_registering.png" width="500">
     <img title="Webhook Registering" alt="Webhook Registering with EVA" src="assets/model_registered.png" width="500">
+
+
+<!-- EVA ML 
+<img title="EVA Label Studio Integration" alt="Pipeline" src="assets/pipeline_screenshot.png" width="500"> -->
