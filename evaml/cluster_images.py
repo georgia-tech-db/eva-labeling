@@ -6,6 +6,7 @@ import random
 from urllib.parse import urlparse
 import requests
 import asyncio
+import sys
 
 import boto3
 import cv2
@@ -18,7 +19,8 @@ from label_studio_tools.core.utils.io import get_data_dir
 
 logger = logging.getLogger(__name__)
 
-# TODO: Remove hardcoded url and key
+# Import Variables from the terminal
+print(sys.argv)
 
 MAIN_URL = "http://localhost:8080"
 API_KEY = 'e5234515ff4ed7f6281e6888ce0c5ee4967389f6'
@@ -59,8 +61,6 @@ class EVAModel(EvaLabelingBase):
         super(EVAModel, self).__init__(**kwargs)
 
         self.labels_file = labels_file
-
-        # TODO: test for when there is image_dir
         # print(self.image_name)
 
         UPLOAD_DIR = os.path.join(get_data_dir(), 'media')
@@ -84,7 +84,7 @@ class EVAModel(EvaLabelingBase):
                     self.label_map[predicted_value] = label_name
         
         # create eva table
-        # self.create_similarity_table()
+        self.create_similarity_table()
     
     def execute_eva_query(self, query):
         loop = asyncio.new_event_loop()
