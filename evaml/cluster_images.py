@@ -138,10 +138,12 @@ class EVAModel(EvaLabelingBase):
         self.insert_feat_to_table(task['id'], task_location, feat)
     
     def image_not_exists(self):
-        with open("./image.txt", "r") as f:
-            out = f.readline()
-            if out:
-                return out
+        if os.path.exists('./image.txt'):
+            with open("./image.txt", "r") as f:
+                out = f.readline()
+                if out:
+                    return out
+            return False
         return False
     
     def add_image(self, name):
