@@ -20,7 +20,6 @@ from label_studio_tools.core.utils.io import get_data_dir
 logger = logging.getLogger(__name__)
 
 # Import Variables from the terminal
-
 import argparse
 parser = argparse.ArgumentParser()
 
