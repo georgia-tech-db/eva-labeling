@@ -20,10 +20,20 @@ from label_studio_tools.core.utils.io import get_data_dir
 logger = logging.getLogger(__name__)
 
 # Import Variables from the terminal
-print(sys.argv)
 
-MAIN_URL = "http://localhost:8080"
-API_KEY = 'e5234515ff4ed7f6281e6888ce0c5ee4967389f6'
+import argparse
+parser = argparse.ArgumentParser()
+
+#-db DATABSE -u USERNAME -p PASSWORD -size 20
+parser.add_argument("-eu", "--evaurl", default="127.0.0.1", help="EVA server URL")
+parser.add_argument("-ep", "--evaport", default=5432, help="EVA server port number", type=int)
+parser.add_argument("-k", "--apikey", help="Label Studio API Key")
+parser.add_argument("-ls", "--lsurl", help="Label Studio Server Location IP + Port")
+
+args, subargs = parser.parse_known_args()
+
+MAIN_URL = args.lsurl
+API_KEY = args.apikey
 
 def json_load(file, int_keys=False):
     with io.open(file, encoding='utf8') as f:
@@ -89,7 +99,7 @@ class EVAModel(EvaLabelingBase):
     def execute_eva_query(self, query):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        EVA_CURSOR = connect(host='127.0.0.1', port=5432).cursor()
+        EVA_CURSOR = connect(host=args.evaurl, port=args.evaport).cursor()
 
         EVA_CURSOR.execute(query)
         res = EVA_CURSOR.fetch_all()
@@ -158,7 +168,6 @@ class EVAModel(EvaLabelingBase):
             for task in tasks:
                 self.insert_task_to_table(task)
 
-            # TODO: returns empty error, due to pandas version?
         else:
             list_of_similar_images = self.similar_images(image_for_similarity)
             for task in tasks:
