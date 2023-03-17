@@ -228,7 +228,7 @@ class EVAModel(EvaLabelingBase):
             if kwargs['event'] == 'ANNOTATION_CREATED':
                 task = kwargs['data']['task']
                 image_for_similarity = self.image_dir + task['data']['image'].split('/data')[-1]
-                self.add_image(image_for_similarity)
+                self.add_image(image_for_similarity, kwargs['data']['project']['id'])
 
         return {}
     
