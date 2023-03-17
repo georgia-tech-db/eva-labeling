@@ -235,7 +235,7 @@ class EVAModel(EvaLabelingBase):
     def remove_all_predictions(self, project_id):
         url = f"{MAIN_URL}/api/predictions/"
         headers = {
-            'Authorization': f'Token {self.access_token}' 
+            'Authorization': f'Token {API_KEY}' 
         }
         r = requests.get(url=url, headers=headers, data={})
         r_obj = json.loads(r.text)
