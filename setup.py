@@ -15,12 +15,12 @@ with open("requirements.txt") as f:
 setuptools.setup(
     name=evalabeling.package_name,
     version=evalabeling.__version__,
-    author="Aryan Rajoria",
+    author='GeorgiaTech DB Group',
     author_email="arajoria3@gatech.edu",
     description="EVA integration for Label Studio",
     long_description=long_description,
-    long_description_content_type="text/markdown",
-    url="https://github.com/aryan-rajoria/eva-labeling",
+    long_description_content_type='text/markdown',
+    url='https://github.com/georgia-tech-db/eva-labeling/',
     packages=setuptools.find_packages(),
     include_package_data=True,
     classifiers=[
