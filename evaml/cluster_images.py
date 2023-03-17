@@ -11,6 +11,7 @@ import sys
 import boto3
 import cv2
 import nest_asyncio
+import eva
 from botocore.exceptions import ClientError
 from eva.server.db_api import connect
 from evalabeling.utils import DATA_UNDEFINED_NAME
@@ -23,7 +24,6 @@ logger = logging.getLogger(__name__)
 import argparse
 parser = argparse.ArgumentParser()
 
-#-db DATABSE -u USERNAME -p PASSWORD -size 20
 parser.add_argument("-eu", "--evaurl", default="127.0.0.1", help="EVA server URL")
 parser.add_argument("-ep", "--evaport", default=5432, help="EVA server port number", type=int)
 parser.add_argument("-k", "--apikey", help="Label Studio API Key")
@@ -41,20 +41,6 @@ def json_load(file, int_keys=False):
             return {int(k): v for k, v in data.items()}
         else:
             return data
-
-def remove_all_predictions():
-    url = f"{MAIN_URL}/api/predictions/"
-    headers = {
-        'Authorization': f'Token {API_KEY}' 
-    }
-    r = requests.get(url=url, headers=headers, data={})
-    r_obj = json.loads(r.text)
-    if not type(r_obj)== dict:
-        for it in r_obj:
-            url = f"{MAIN_URL}/api/predictions/{it['id']}"
-            r = requests.delete(url=url, headers=headers, data={})
-            if not r.status_code==204:
-                print("error deleting file:", url, headers)
 
 image_for_similarity = None
 
@@ -113,6 +99,15 @@ class EVAModel(EvaLabelingBase):
                  feat NDARRAY FLOAT32(1, ANYDIM));
                 """
         self.execute_eva_query(create_table_query)
+
+        create_feat_extractor = f"""
+        CREATE UDF FeatureExtractor
+        INPUT  (frame NDARRAY UINT8(3, ANYDIM, ANYDIM))
+        OUTPUT (features NDARRAY FLOAT32(ANYDIM))
+        TYPE  Classification
+        IMPL  '{os.path.split(eva.__file__)[0]}/udfs/feature_extractor.py';
+        """
+        self.execute_eva_query(create_feat_extractor)
     
     def insert_feat_to_table(self, task_id, img_name, feature):
         insert_query = f"""
@@ -146,23 +141,23 @@ class EVAModel(EvaLabelingBase):
         feat = self.get_feat(image_dir=task_location)
         self.insert_feat_to_table(task['id'], task_location, feat)
     
-    def image_not_exists(self):
-        if os.path.exists('./image.txt'):
-            with open("./image.txt", "r") as f:
+    def image_not_exists(self, project_id):
+        if os.path.exists(f"./image_{project_id}.txt"):
+            with open(f"./image_{project_id}.txt", "r") as f:
                 out = f.readline()
                 if out:
                     return out
             return False
         return False
     
-    def add_image(self, name):
-        with open("./image.txt", "w") as f:
+    def add_image(self, name, project_id):
+        with open(f"./image_{project_id}.txt", "w") as f:
             f.writelines([str(name)])
 
 
     def predict(self, tasks, **kwargs):
         predictions = []
-        image_for_similarity = self.image_not_exists()
+        image_for_similarity = self.image_not_exists(tasks[0]['project'])
         if not image_for_similarity:
             for task in tasks:
                 self.insert_task_to_table(task)
@@ -225,14 +220,28 @@ class EVAModel(EvaLabelingBase):
 
     def fit(self, tasks, workdir=None, **kwargs):
         # remove the previous predictions
-        remove_all_predictions()
+        
         # add new predictions
         
         if 'event' in kwargs:
+            self.remove_all_predictions(project_id=kwargs['data']['project']['id'])
             if kwargs['event'] == 'ANNOTATION_CREATED':
                 task = kwargs['data']['task']
                 image_for_similarity = self.image_dir + task['data']['image'].split('/data')[-1]
                 self.add_image(image_for_similarity)
 
         return {}
-        
+    
+    def remove_all_predictions(self, project_id):
+        url = f"{MAIN_URL}/api/predictions/"
+        headers = {
+            'Authorization': f'Token {self.access_token}' 
+        }
+        r = requests.get(url=url, headers=headers, data={})
+        r_obj = json.loads(r.text)
+        if not type(r_obj)== dict:
+            for it in r_obj:
+                url = f"{MAIN_URL}/api/predictions/{it['id']}"
+                r = requests.delete(url=url, headers=headers, data={})
+                if not r.status_code==204:
+                    print("error deleting file:", url, headers)

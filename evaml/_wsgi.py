@@ -67,7 +67,7 @@ if __name__ == "__main__":
         '--check', dest='check', action='store_true',
         help='Validate model instance before launching server')
 
-    args = parser.parse_args()
+    args, subargs = parser.parse_known_args()
 
     # setup logging level
     if args.log_level:
