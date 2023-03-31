@@ -35,7 +35,7 @@ It lets you connect to Label Studio server to do the following:
 3. Start eva-labeling server
     > Note: this will also start the `evadb` server.
     ```bash
-    evalabeling start ./evaml
+    evalabeling start ./evaml -eu <eva-server-url> -ep  <eva-server-port> -k <apikey> -ls <label-studio-url>
     ```
 
 4. Add Image Clustering Interface
@@ -43,8 +43,7 @@ It lets you connect to Label Studio server to do the following:
     <View>
     <Image name="image" value="$image"/>
     <RectangleLabels name="label" toName="image">
-      <Label value="Airplane" background="green"/>
-      <Label value="Car" background="blue"/>
+      
     </RectangleLabels>
     <TextArea name="cluster" toName="image"
               rows="1" editable="true" />
