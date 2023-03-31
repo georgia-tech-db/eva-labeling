@@ -1,5 +1,5 @@
 # Package name
-package_name = 'evalabeling'
+package_name = "evalabeling"
 
 # Package version
-__version__ = '0.0.1'
+__version__ = "0.0.1"

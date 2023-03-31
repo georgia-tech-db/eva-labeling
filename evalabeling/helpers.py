@@ -3,7 +3,6 @@ from .model import EvaLabelingBase
 
 
 class EvaLabelingBaseHelper(EvaLabelingBase):
-
     @abstractmethod
     def prepare_tasks(self, tasks, workdir=None, **kwargs):
         pass
@@ -31,27 +30,26 @@ class EvaLabelingBaseHelper(EvaLabelingBase):
         return self.fit2(X, y, **kwargs)
 
     def _has_annotation(self, task):
-        return 'completions' in task
+        return "completions" in task
 
 
 class LabelStudioMLChoices(EvaLabelingBaseHelper):
-
     def __init__(self, **kwargs):
         super(LabelStudioMLChoices, self).__init__(**kwargs)
         assert len(self.parsed_label_config) == 1
         self.from_name, self.info = list(self.parsed_label_config.items())[0]
-        assert self.info['type'] == 'Choices'
-        assert len(self.info['to_name']) == 1
-        assert len(self.info['inputs']) == 1
-        self.to_name = self.info['to_name'][0]
-        self.value = self.info['inputs'][0]['value']
+        assert self.info["type"] == "Choices"
+        assert len(self.info["to_name"]) == 1
+        assert len(self.info["inputs"]) == 1
+        self.to_name = self.info["to_name"][0]
+        self.value = self.info["inputs"][0]["value"]
 
     def prepare_tasks(self, tasks, workdir=None, **kwargs):
         X, y = [], []
         for task in tasks:
-            X.append(task['data'][self.value])
+            X.append(task["data"][self.value])
             if self._has_annotation(task):
-                choices = task['completions'][0]['result'][0]['value']['choices']
+                choices = task["completions"][0]["result"][0]["value"]["choices"]
                 y.append(choices)
             else:
                 y.append(None)
@@ -61,11 +59,13 @@ class LabelStudioMLChoices(EvaLabelingBaseHelper):
         list_choices, scores = predictions
         results = []
         for choices, score in zip(list_choices, scores):
-            result = [{
-                'from_name': self.from_name,
-                'to_name': self.to_name,
-                'type': 'choices',
-                'value': {'choices': choices}
-            }]
-            results.append({'result': result, 'score': score})
+            result = [
+                {
+                    "from_name": self.from_name,
+                    "to_name": self.to_name,
+                    "type": "choices",
+                    "value": {"choices": choices},
+                }
+            ]
+            results.append({"result": result, "score": score})
         return results

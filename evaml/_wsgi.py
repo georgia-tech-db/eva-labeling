@@ -3,35 +3,31 @@ import argparse
 import logging
 import logging.config
 
-logging.config.dictConfig({
-  "version": 1,
-  "formatters": {
-    "standard": {
-      "format": "[%(asctime)s] [%(levelname)s] [%(name)s::%(funcName)s::%(lineno)d] %(message)s"
+logging.config.dictConfig(
+    {
+        "version": 1,
+        "formatters": {
+            "standard": {
+                "format": "[%(asctime)s] [%(levelname)s] [%(name)s::%(funcName)s::%(lineno)d] %(message)s"
+            }
+        },
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "level": "DEBUG",
+                "stream": "ext://sys.stdout",
+                "formatter": "standard",
+            }
+        },
+        "root": {"level": "ERROR", "handlers": ["console"], "propagate": True},
     }
-  },
-  "handlers": {
-    "console": {
-      "class": "logging.StreamHandler",
-      "level": "DEBUG",
-      "stream": "ext://sys.stdout",
-      "formatter": "standard"
-    }
-  },
-  "root": {
-    "level": "ERROR",
-    "handlers": [
-      "console"
-    ],
-    "propagate": True
-  }
-})
+)
 
 from evalabeling.api import init_app
 from cluster_images import EVAModel
 
 
-_DEFAULT_CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'config.json')
+_DEFAULT_CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.json")
 
 
 def get_kwargs_from_config(config_path=_DEFAULT_CONFIG_PATH):
@@ -44,28 +40,44 @@ def get_kwargs_from_config(config_path=_DEFAULT_CONFIG_PATH):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Label studio')
+    parser = argparse.ArgumentParser(description="Label studio")
     parser.add_argument(
-        '-p', '--port', dest='port', type=int, default=9090,
-        help='Server port')
+        "-p", "--port", dest="port", type=int, default=9090, help="Server port"
+    )
     parser.add_argument(
-        '--host', dest='host', type=str, default='0.0.0.0',
-        help='Server host')
+        "--host", dest="host", type=str, default="0.0.0.0", help="Server host"
+    )
     parser.add_argument(
-        '--kwargs', '--with', dest='kwargs', metavar='KEY=VAL', nargs='+', type=lambda kv: kv.split('='),
-        help='Additional EvaLabelingBase model initialization kwargs')
+        "--kwargs",
+        "--with",
+        dest="kwargs",
+        metavar="KEY=VAL",
+        nargs="+",
+        type=lambda kv: kv.split("="),
+        help="Additional EvaLabelingBase model initialization kwargs",
+    )
     parser.add_argument(
-        '-d', '--debug', dest='debug', action='store_true',
-        help='Switch debug mode')
+        "-d", "--debug", dest="debug", action="store_true", help="Switch debug mode"
+    )
     parser.add_argument(
-        '--log-level', dest='log_level', choices=['DEBUG', 'INFO', 'WARNING', 'ERROR'], default=None,
-        help='Logging level')
+        "--log-level",
+        dest="log_level",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+        default=None,
+        help="Logging level",
+    )
     parser.add_argument(
-        '--model-dir', dest='model_dir', default=os.path.dirname(__file__),
-        help='Directory where models are stored (relative to the project directory)')
+        "--model-dir",
+        dest="model_dir",
+        default=os.path.dirname(__file__),
+        help="Directory where models are stored (relative to the project directory)",
+    )
     parser.add_argument(
-        '--check', dest='check', action='store_true',
-        help='Validate model instance before launching server')
+        "--check",
+        dest="check",
+        action="store_true",
+        help="Validate model instance before launching server",
+    )
 
     args, subargs = parser.parse_known_args()
 
@@ -85,9 +97,9 @@ if __name__ == "__main__":
         for k, v in args.kwargs:
             if v.isdigit():
                 param[k] = int(v)
-            elif v == 'True' or v == 'true':
+            elif v == "True" or v == "true":
                 param[k] = True
-            elif v == 'False' or v == 'False':
+            elif v == "False" or v == "False":
                 param[k] = False
             elif isfloat(v):
                 param[k] = float(v)
@@ -106,10 +118,10 @@ if __name__ == "__main__":
 
     app = init_app(
         model_class=EVAModel,
-        model_dir=os.environ.get('MODEL_DIR', args.model_dir),
-        redis_queue=os.environ.get('RQ_QUEUE_NAME', 'default'),
-        redis_host=os.environ.get('REDIS_HOST', 'localhost'),
-        redis_port=os.environ.get('REDIS_PORT', 6379),
+        model_dir=os.environ.get("MODEL_DIR", args.model_dir),
+        redis_queue=os.environ.get("RQ_QUEUE_NAME", "default"),
+        redis_host=os.environ.get("REDIS_HOST", "localhost"),
+        redis_port=os.environ.get("REDIS_PORT", 6379),
         **kwargs
     )
 
@@ -119,8 +131,8 @@ else:
     # for uWSGI use
     app = init_app(
         model_class=EVAModel,
-        model_dir=os.environ.get('MODEL_DIR', os.path.dirname(__file__)),
-        redis_queue=os.environ.get('RQ_QUEUE_NAME', 'default'),
-        redis_host=os.environ.get('REDIS_HOST', 'localhost'),
-        redis_port=os.environ.get('REDIS_PORT', 6379)
+        model_dir=os.environ.get("MODEL_DIR", os.path.dirname(__file__)),
+        redis_queue=os.environ.get("RQ_QUEUE_NAME", "default"),
+        redis_host=os.environ.get("REDIS_HOST", "localhost"),
+        redis_port=os.environ.get("REDIS_PORT", 6379),
     )
