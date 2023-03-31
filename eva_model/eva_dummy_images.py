@@ -3,23 +3,13 @@ import json
 import logging
 import os
 import random
-from urllib.parse import urlparse
-
-import boto3
-import cv2
 import nest_asyncio
-from botocore.exceptions import ClientError
 from eva.server.db_api import connect
 from label_studio_tools.core.utils.io import get_data_dir
 
 from evalabeling.model import EvaLabelingBase
-from evalabeling.utils import DATA_UNDEFINED_NAME
 
 logger = logging.getLogger(__name__)
-
-nest_asyncio.apply()
-EVA_CURSOR = connect(host="127.0.0.1", port=5432).cursor()
-
 
 def json_load(file, int_keys=False):
     with io.open(file, encoding="utf8") as f:

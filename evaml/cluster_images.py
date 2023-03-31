@@ -1,37 +1,33 @@
 import asyncio
+import argparse
 import io
 import json
 import logging
 import os
 import random
-import sys
-from urllib.parse import urlparse
-
-import boto3
-import cv2
 import eva
-import nest_asyncio
 import requests
-from botocore.exceptions import ClientError
 from eva.server.db_api import connect
 from label_studio_tools.core.utils.io import get_data_dir
 
 from evalabeling.model import EvaLabelingBase
-from evalabeling.utils import DATA_UNDEFINED_NAME
 
 logger = logging.getLogger(__name__)
 
 # Import Variables from the terminal
-import argparse
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-eu", "--evaurl", default="127.0.0.1", help="EVA server URL")
+parser.add_argument("-eu", "--evaurl", default="127.0.0.1",
+                    help="EVA server URL")
 parser.add_argument(
-    "-ep", "--evaport", default=5432, help="EVA server port number", type=int
+    "-ep", "--evaport", default=5432,
+    help="EVA server port number", type=int
 )
-parser.add_argument("-k", "--apikey", help="Label Studio API Key")
-parser.add_argument("-ls", "--lsurl", help="Label Studio Server Location IP + Port")
+parser.add_argument("-k", "--apikey",
+                    help="Label Studio API Key")
+parser.add_argument("-ls", "--lsurl",
+                    help="Label Studio Server Location IP + Port")
 
 args, subargs = parser.parse_known_args()
 
@@ -53,7 +49,8 @@ image_for_similarity = None
 
 class EVAModel(EvaLabelingBase):
     """
-    EVA connection using Label Studio ML backend server. This will allow you to run EVA queries on Label Studio.
+    EVA connection using Label Studio ML backend server.
+    This will allow you to run EVA queries on Label Studio.
     """
 
     EVA_CURSOR = None
@@ -187,7 +184,7 @@ class EVAModel(EvaLabelingBase):
                 if task_id in list_of_similar_images:
                     output.append(
                         {
-                            "value": {"text": [f"TOP5"]},
+                            "value": {"text": ["TOP5"]},
                             "id": str(id_gen),
                             "from_name": "cluster",
                             "to_name": "image",
@@ -198,7 +195,7 @@ class EVAModel(EvaLabelingBase):
                 else:
                     output.append(
                         {
-                            "value": {"text": [f"Not"]},
+                            "value": {"text": ["Not"]},
                             "id": str(id_gen),
                             "from_name": "cluster",
                             "to_name": "image",

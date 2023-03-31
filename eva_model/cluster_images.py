@@ -1,34 +1,29 @@
 import asyncio
+import argparse
 import io
 import json
 import logging
 import os
 import random
-import sys
-from urllib.parse import urlparse
-
-import boto3
-import cv2
 import eva
-import nest_asyncio
 import requests
-from botocore.exceptions import ClientError
 from eva.server.db_api import connect
 from label_studio_tools.core.utils.io import get_data_dir
 
 from evalabeling.model import EvaLabelingBase
-from evalabeling.utils import DATA_UNDEFINED_NAME
 
 logger = logging.getLogger(__name__)
 
 # Import Variables from the terminal
-import argparse
+
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-eu", "--evaurl", default="127.0.0.1", help="EVA server URL")
+parser.add_argument("-eu", "--evaurl", default="127.0.0.1", 
+                    help="EVA server URL")
 parser.add_argument(
-    "-ep", "--evaport", default=5432, help="EVA server port number", type=int
+    "-ep", "--evaport", default=5432, 
+    help="EVA server port number", type=int
 )
 parser.add_argument("-k", "--apikey", help="Label Studio API Key")
 parser.add_argument("-ls", "--lsurl", help="Label Studio Server Location IP + Port")
