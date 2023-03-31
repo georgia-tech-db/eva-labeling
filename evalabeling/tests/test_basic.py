@@ -1,6 +1,7 @@
-import requests
-import pytest
 import os
+
+import pytest
+import requests
 
 ML_BACKEND = os.environ.get("ML_BACKEND", "")
 

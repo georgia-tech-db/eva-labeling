@@ -1,4 +1,5 @@
 import setuptools
+
 import evalabeling
 
 print(evalabeling.package_name, evalabeling.__version__)

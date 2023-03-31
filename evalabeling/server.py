@@ -1,17 +1,14 @@
-import os
-import subprocess
-import logging
 import argparse
+import logging
+import os
+import re
 import shutil
+import subprocess
 
 import colorama
-import re
-
 from colorama import Fore
 
-
 from .model import get_all_classes_inherited_EvaLabelingBase
-
 
 colorama.init()
 logger = logging.getLogger(__name__)

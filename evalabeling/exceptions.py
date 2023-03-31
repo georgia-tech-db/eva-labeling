@@ -1,7 +1,7 @@
-import traceback as tb
 import logging
+import traceback as tb
 
-from flask import request, jsonify, make_response
+from flask import jsonify, make_response, request
 
 logger = logging.getLogger(__name__)
 

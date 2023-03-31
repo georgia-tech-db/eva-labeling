@@ -1,22 +1,23 @@
+import asyncio
 import io
 import json
 import logging
 import os
 import random
-from urllib.parse import urlparse
-import requests
-import asyncio
 import sys
+from urllib.parse import urlparse
 
 import boto3
 import cv2
-import nest_asyncio
 import eva
+import nest_asyncio
+import requests
 from botocore.exceptions import ClientError
 from eva.server.db_api import connect
-from evalabeling.utils import DATA_UNDEFINED_NAME
-from evalabeling.model import EvaLabelingBase
 from label_studio_tools.core.utils.io import get_data_dir
+
+from evalabeling.model import EvaLabelingBase
+from evalabeling.utils import DATA_UNDEFINED_NAME
 
 logger = logging.getLogger(__name__)
 

@@ -1,11 +1,12 @@
-import os
+import io
+import json
 import logging
+import os
 import sys
 import time
-import json
-import redis
+
 import attr
-import io
+import redis
 
 try:
     import torch.multiprocessing as mp
@@ -16,24 +17,25 @@ try:
         pass
 except ImportError:
     import multiprocessing as mp
+
 import importlib
 import importlib.util
 import inspect
-
-from typing import Dict
 from abc import ABC, abstractmethod
+from contextlib import contextmanager
 from datetime import datetime
 from itertools import tee
-from contextlib import contextmanager
-from redis import Redis
-from rq import Queue, get_current_job
-from rq.registry import StartedJobRegistry, FinishedJobRegistry, FailedJobRegistry
-from rq.job import Job
-from colorama import Fore
+from typing import Dict
 
-from label_studio_tools.core.utils.params import get_bool_env
+from colorama import Fore
 from label_studio_tools.core.label_config import parse_config
 from label_studio_tools.core.utils.io import get_local_path
+from label_studio_tools.core.utils.params import get_bool_env
+from redis import Redis
+from rq import Queue, get_current_job
+from rq.job import Job
+from rq.registry import (FailedJobRegistry, FinishedJobRegistry,
+                         StartedJobRegistry)
 
 logger = logging.getLogger(__name__)
 

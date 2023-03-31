@@ -1,7 +1,7 @@
-import os
 import argparse
 import logging
 import logging.config
+import os
 
 logging.config.dictConfig(
     {
@@ -23,9 +23,9 @@ logging.config.dictConfig(
     }
 )
 
-from evalabeling.api import init_app
 from cluster_images import EVAModel
 
+from evalabeling.api import init_app
 
 _DEFAULT_CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.json")
 

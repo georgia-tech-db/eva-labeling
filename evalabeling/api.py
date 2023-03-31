@@ -1,11 +1,11 @@
 import logging
 import os
 
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, request
 from rq.exceptions import NoSuchJobError
 
-from .model import LabelStudioMLManager, LABEL_STUDIO_ML_BACKEND_V2_DEFAULT
 from .exceptions import exception_handler
+from .model import LABEL_STUDIO_ML_BACKEND_V2_DEFAULT, LabelStudioMLManager
 
 logger = logging.getLogger(__name__)
 

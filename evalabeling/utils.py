@@ -1,9 +1,8 @@
 import logging
 
-from PIL import Image, ImageOps
-
-from label_studio_tools.core.utils.params import get_env
 from label_studio_tools.core.utils.io import get_local_path
+from label_studio_tools.core.utils.params import get_env
+from PIL import Image, ImageOps
 
 DATA_UNDEFINED_NAME = "$undefined$"
 

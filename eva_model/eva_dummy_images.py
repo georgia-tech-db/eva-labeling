@@ -10,9 +10,10 @@ import cv2
 import nest_asyncio
 from botocore.exceptions import ClientError
 from eva.server.db_api import connect
+from label_studio_tools.core.utils.io import get_data_dir
+
 from evalabeling.model import EvaLabelingBase
 from evalabeling.utils import DATA_UNDEFINED_NAME
-from label_studio_tools.core.utils.io import get_data_dir
 
 logger = logging.getLogger(__name__)
 
