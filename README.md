@@ -1,13 +1,18 @@
 # eva-labeling
 ## What is EVA Labeling?
 
-The EVA Labeling is a wrapper to enable you to run EVA along side [Label-Studio](!https://labelstud.io/)
-It lets you connect to Label Studio server to do the following:
+The EVA Labeling is a wrapper to enable you to run EVA alongside [Label-Studio](!https://labelstud.io/) It lets you connect to Label Studio server to do the following:
 
-- Cluster similar images to speed up the Labeling Process
-- Dynamically pre-annotate data based on model inference results
-- Retrain or fine-tune a model based on recently annotated data
+- Annotate your dataset more quickly and easily by allowing you to label them in bulk.
+- Dynamically pre-annotate data based on model inference results.
+- Retrain or fine-tune a model based on recently annotated data.
 
+## Video
+
+<video height="500" controls>
+  <source src="assets\bulk-prop-demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## How it works
 
@@ -24,7 +29,7 @@ It lets you connect to Label Studio server to do the following:
     ```
 
 2. Setup Environment  
-    It is highly recommended to use `venv` python environments. You can use the same environment as Label Studio does. [Read more](https://docs.python.org/3/tutorial/venv.html#creating-virtual-environments) about creating virtual environments via `venv`.
+    It is highly recommended to use `venv` python environments. You can use the same environment as Label Studio. [Read more](https://docs.python.org/3/tutorial/venv.html#creating-virtual-environments) about creating virtual environments via `venv`.
    ```bash
    cd eva-labeling
    
