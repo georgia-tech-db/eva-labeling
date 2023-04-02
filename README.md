@@ -9,10 +9,7 @@ The EVA Labeling is a wrapper to enable you to run EVA alongside [Label-Studio](
 
 ## Demo video
 
-<video height="500" controls>
-  <source src="assets\bulk-prop-demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-a1bb-83a39fc174d6.mp4
 
 ## How it works
 
