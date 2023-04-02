@@ -7,7 +7,7 @@ The EVA Labeling is a wrapper to enable you to run EVA alongside [Label-Studio](
 - Dynamically pre-annotate data based on model inference results.
 - Retrain or fine-tune a model based on recently annotated data.
 
-## Video
+## Demo video
 
 <video height="500" controls>
   <source src="assets\bulk-prop-demo.mp4" type="video/mp4">
