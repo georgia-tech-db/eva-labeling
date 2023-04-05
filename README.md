@@ -20,7 +20,7 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
 
 ## Quickstart
 
-> :warning: The Label Studio server should be started with flag **EXPERIMENTAL_FEATURES=1**: Otherwise Bulk Propagation will not work!
+> :warning: The Label Studio server should be started with flag **EXPERIMENTAL_FEATURES=1** Otherwise Bulk Propagation will not work!
 
 1. Clone this repository
     ```bash
