@@ -9,10 +9,7 @@ The EVA Labeling is a wrapper to enable you to run EVA alongside [Label-Studio](
 
 ## Demo video
 
-<video height="500" controls>
-  <source src="assets\bulk-prop-demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-a1bb-83a39fc174d6.mp4
 
 ## How it works
 
@@ -22,6 +19,8 @@ The EVA Labeling is a wrapper to enable you to run EVA alongside [Label-Studio](
 
 
 ## Quickstart
+
+> :warning: The Label Studio server should be started with flag **EXPERIMENTAL_FEATURES=1** Otherwise Bulk Propagation will not work!
 
 1. Clone this repository
     ```bash
@@ -40,7 +39,7 @@ The EVA Labeling is a wrapper to enable you to run EVA alongside [Label-Studio](
 3. Start eva-labeling server
     > Note: this will also start the `evadb` server.
     ```bash
-    evalabeling start ./evaml -eu <eva-server-url> -ep  <eva-server-port> -k <apikey> -ls <label-studio-url>
+    label-studio-ml start ./evaml -eu <eva-server-url> -ep  <eva-server-port> -k <apikey> -ls <label-studio-url>
     ```
 
 4. Add Image Clustering Interface
@@ -63,3 +62,12 @@ The EVA Labeling is a wrapper to enable you to run EVA alongside [Label-Studio](
 
 <!-- EVA ML 
 <img title="EVA Label Studio Integration" alt="Pipeline" src="assets/pipeline_screenshot.png" width="500"> -->
+
+## Adding Custom Models to EVA
+
+1. Register your Feature Extractor model into EVA.
+    > Refer [EVA docs](https://evadb.readthedocs.io/en/stable/source/reference/udf.html) for more information.
+    > [Here](https://evadb.readthedocs.io/en/stable/source/tutorials/04-custom-model.html) is an example of adding a custom model.
+
+2. inside `./evaml/cluster_image.py`, you may add your queries.
+    > Refer [Label Studio ML Backend](https://github.com/heartexlabs/label-studio-ml-backend) for more information.
