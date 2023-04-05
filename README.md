@@ -62,3 +62,12 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
 
 <!-- EVA ML 
 <img title="EVA Label Studio Integration" alt="Pipeline" src="assets/pipeline_screenshot.png" width="500"> -->
+
+## Adding Custom Models to EVA
+
+1. Register your Feature Extractor model into EVA.
+    > Refer [EVA docs](https://evadb.readthedocs.io/en/stable/source/reference/udf.html) for more information.
+    > [Here](https://evadb.readthedocs.io/en/stable/source/tutorials/04-custom-model.html) is an example of adding a custom model.
+
+2. inside `./evaml/cluster_image.py`, you may add your queries.
+    > Refer [Label Studio ML Backend](https://github.com/heartexlabs/label-studio-ml-backend) for more information.
