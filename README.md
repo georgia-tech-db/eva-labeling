@@ -39,7 +39,7 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
 3. Start eva-labeling server
     > Note: this will also start the `evadb` server.
     ```bash
-    evalabeling start ./evaml -eu <eva-server-url> -ep  <eva-server-port> -k <apikey> -ls <label-studio-url>
+    label-studio-ml start ./evaml -eu <eva-server-url> -ep  <eva-server-port> -k <apikey> -ls <label-studio-url>
     ```
 
 4. Add Image Clustering Interface
