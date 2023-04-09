@@ -22,7 +22,7 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
 > :warning: The Label Studio server should be started with flag **EXPERIMENTAL_FEATURES=1** Otherwise Bulk Propagation will not work!
 
 1. Setup Environment  
-    It is highly recommended to use `venv` python environments. You can use the same environment as Label Studio. [Read more](https://docs.python.org/3/tutorial/venv.html#creating-virtual-environments) about creating virtual environments via `venv`.
+   Create a virtual environment Label Studio. [Read more](https://docs.python.org/3/tutorial/venv.html#creating-virtual-environments) about creating virtual environments via `venv`.
    ```bash
    # Install Label Studio ML Backend
    pip install label-studio-ml
@@ -30,13 +30,13 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
    pip install -r requirements.txt
    ```
 
-2. Start eva-labeling server
-    > Note: this will also start the `evadb` server.
+2. Start EVA Labeling Server
+    > Note: This command will automatically start the `EVA` server.
     ```bash
     label-studio-ml start ./evaml -eu <eva-server-url> -ep  <eva-server-port> -k <apikey> -ls <label-studio-url>
     ```
 
-3. Add Image Clustering Interface
+3. Add the Image Clustering Interface
     ```html
     <View>
     <Image name="image" value="$image"/>
@@ -48,7 +48,7 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
     </View>
     ```
 
-4. Start and Register EVA ML Backend to Label Studio.
+4. Start and Register the EVA ML Backend to Label Studio.
     > Following [Label Studio ML documentation](https://github.com/heartexlabs/label-studio-ml-backend)  
     <img title="Webhook Registering" alt="Webhook Registering with EVA" src="assets/model_registering.png" width="500">
     <img title="Webhook Registering" alt="Webhook Registering with EVA" src="assets/model_registered.png" width="500">
@@ -60,8 +60,8 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
 ## Adding Custom Models to EVA
 
 1. Register your Feature Extractor model into EVA.
-    > Refer [EVA docs](https://evadb.readthedocs.io/en/stable/source/reference/udf.html) for more information.
+    > Refer the [EVA documentation](https://evadb.readthedocs.io/en/stable/source/reference/udf.html) for more information.
     > [Here](https://evadb.readthedocs.io/en/stable/source/tutorials/04-custom-model.html) is an example of adding a custom model.
 
-2. you may add your queries inside `./evaml/cluster_image.py`, 
-    > Refer [Label Studio ML Backend](https://github.com/heartexlabs/label-studio-ml-backend) for more information.
+2. You can add your custom queries inside `./evaml/cluster_image.py`, 
+    > Refer the [Label Studio ML Backend documentation](https://github.com/heartexlabs/label-studio-ml-backend) for more information.
