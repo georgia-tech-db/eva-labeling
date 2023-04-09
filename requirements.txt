@@ -1,3 +1,4 @@
+evadb>=0.1.6
 attr==0.3.1
 attrs>=19.2.0
 appdirs>=1.4.3
@@ -7,10 +8,10 @@ lxml>=4.2.5
 Pillow
 requests>=2.22.0,<3
 label-studio-tools>=0.0.0.dev11
+label-studio-ml>=1.0.8
 Jinja2==3.0.3
 itsdangerous==2.0.1
 werkzeug==2.0.2
-evadb>=0.1.6
 gunicorn==20.1.0
 rq==1.10.1
 redis
