@@ -10,7 +10,7 @@ import requests
 from eva.server.db_api import EVAConnection
 from label_studio_tools.core.utils.io import get_data_dir
 
-from evalabeling.model import EvaLabelingBase
+from label_studio_ml.model import LabelStudioMLBase
 
 logger = logging.getLogger(__name__)
 
@@ -70,7 +70,7 @@ async def eva_cursor(query):
         raise e
     return response
 
-class EVAModel(EvaLabelingBase):
+class EVAModel(LabelStudioMLBase):
     """
     EVA connection using Label Studio ML backend server.
     This will allow you to run EVA queries on Label Studio.
