@@ -7,7 +7,7 @@ import os
 import random
 import eva
 import requests
-from eva.server.db_api import connect
+from eva.server.db_api import EVAConnection
 from label_studio_tools.core.utils.io import get_data_dir
 
 from evalabeling.model import EvaLabelingBase
@@ -46,6 +46,29 @@ def json_load(file, int_keys=False):
 
 image_for_similarity = None
 
+async def connect_eva_cursor(host, port, query):
+    try:
+        reader, writer = None, None
+        reader, writer = await asyncio.open_connection(host, port)
+        connection = EVAConnection(reader, writer)
+        cursor = connection.cursor()
+
+        await cursor.execute_async(query)
+        response = await cursor.fetch_all_async()
+        return response
+    
+    except Exception as e:
+        logger.error("Error.", exc_info=e)
+        if writer is not None:
+            writer.close()
+
+async def eva_cursor(query):
+    try:
+        response = await connect_eva_cursor(args.evaurl, args.evaport, query)
+    except Exception as e:
+        logger.critical(e)
+        raise e
+    return response
 
 class EVAModel(EvaLabelingBase):
     """
@@ -94,12 +117,8 @@ class EVAModel(EvaLabelingBase):
         self.create_similarity_table()
 
     def execute_eva_query(self, query):
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        EVA_CURSOR = connect(host=args.evaurl, port=args.evaport).cursor()
-
-        EVA_CURSOR.execute(query)
-        res = EVA_CURSOR.fetch_all()
+        res = asyncio.run(eva_cursor(query))
+        print(res)
         return res
 
     def create_similarity_table(self):
