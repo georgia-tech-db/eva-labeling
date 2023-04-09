@@ -1,9 +1,9 @@
 # eva-labeling
 ## What is EVA Labeling?
 
-The EVA Labeling is a wrapper to enable you to run EVA alongside [Label-Studio](!https://labelstud.io/) It lets you connect to Label Studio server to do the following:
+EVA Labeling is a wrapper to enable you to run EVA alongside [Label-Studio](!https://labelstud.io/) It lets you connect to Label Studio server to do the following:
 
-- Annotate your dataset more quickly and easily by allowing you to label them in bulk.
+- Annotate your dataset more quickly and easily by allowing "bulk labeling" of a set of images.
 - Dynamically pre-annotate data based on model inference results.
 - Retrain or fine-tune a model based on recently annotated data.
 
@@ -13,10 +13,9 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
 
 ## How it works
 
-1. This application helps fetch data from Label Studio server and add it to EVA.
-2. Then you use Label Studio ML Backend to run `EVA Query` Statements on you data. (e.g. Clustering, Object detection, Object Tracking)
-3. Returns the desired output to Label Studio
-
+1. It first fetches <image, label> pairs from Label Studio server and loads them into the EVA database server.
+2. It then runs queries over the loaded data within the EVA database server (e.g., Image Classification Query, Object Detection Query)
+3. Finally, it sends the query results (i.e., updated labels) back to the Label Studio server.
 
 ## Quickstart
 
@@ -27,6 +26,8 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
    ```bash
    # Install Label Studio ML Backend
    pip install label-studio-ml
+   # Install dependencies
+   pip install -r requirements.txt
    ```
 
 2. Start eva-labeling server
