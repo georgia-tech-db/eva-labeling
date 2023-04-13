@@ -23,9 +23,8 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
 
 1. Setup Environment  
    Create a virtual environment Label Studio. [Read more](https://docs.python.org/3/tutorial/venv.html#creating-virtual-environments) about creating virtual environments via `venv`.
+   
    ```bash
-   # Install Label Studio ML Backend
-   pip install label-studio-ml
    # Install dependencies
    pip install -r requirements.txt
    ```
