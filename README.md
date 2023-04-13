@@ -14,8 +14,8 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
 ## How it works
 
 1. It first fetches <image, label> pairs from Label Studio server and loads them into the EVA database server.
-2. It then runs queries over the loaded data within the EVA database server (e.g., Image Classification Query, Object Detection Query)
-3. Finally, it sends the query results (i.e., updated labels) back to the Label Studio server.
+2. It then runs queries over the loaded data within the EVA database server (e.g., image classification query, object detection query)
+3. Finally, it sends the query results (i.e., the updated labels) back to the Label Studio server.
 
 ## Quickstart
 
