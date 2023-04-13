@@ -19,23 +19,24 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
 
 ## Quickstart
 
-> :warning: The Label Studio server should be started with flag **EXPERIMENTAL_FEATURES=1** Otherwise Bulk Propagation will not work!
+> :warning: The Label Studio server should be started with flag **EXPERIMENTAL_FEATURES=1** for the "Bulk Label Propagation" feature to work!
 
-1. Setup Environment  
-   Create a virtual environment Label Studio. [Read more](https://docs.python.org/3/tutorial/venv.html#creating-virtual-environments) about creating virtual environments via `venv`.
-   
+1. <b>Install the dependencies in a virtual environment</b>
+    
    ```bash
    # Install dependencies
    pip install -r requirements.txt
    ```
 
-2. Start EVA Labeling Server
+2. <b>Start EVA Labeling Server</b>
+
     > Note: This command will automatically start the `EVA` server.
     ```bash
     label-studio-ml start ./evaml -eu <eva-server-url> -ep  <eva-server-port> -k <apikey> -ls <label-studio-url>
     ```
 
-3. Add the Image Clustering Interface
+3. <b>Add the Image Clustering Interface</b>
+
     ```html
     <View>
     <Image name="image" value="$image"/>
@@ -47,7 +48,7 @@ https://user-images.githubusercontent.com/57455619/229378952-b1048139-3d05-4377-
     </View>
     ```
 
-4. Start and Register the EVA ML Backend to Label Studio.
+4. <b>Start and Register the EVA ML Backend to Label Studio.</b>
     > Following [Label Studio ML documentation](https://github.com/heartexlabs/label-studio-ml-backend)  
     <img title="Webhook Registering" alt="Webhook Registering with EVA" src="assets/model_registering.png" width="500">
     <img title="Webhook Registering" alt="Webhook Registering with EVA" src="assets/model_registered.png" width="500">
